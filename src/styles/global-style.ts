@@ -1,6 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
+import type { Theme } from "./theme";
+
+export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 
   html {
     font-size: 14px;
@@ -10,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
   }
 
   *,
@@ -44,6 +46,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html, body, #root {
+    width: 100%;
+    height: 100vh;
     max-width: 100%;
     max-height: 100vh;
   } 
