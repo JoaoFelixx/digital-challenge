@@ -1,11 +1,4 @@
-import { MainLayout } from "@/layout/main"
-
-
-
-
-
-
-
+import { MainLayout } from "@/layout"
 
 
 export const Dashboard = () => {
