@@ -1,12 +1,12 @@
-import {
+import React, {
+  type ChangeEvent,
+
   Children,
 
   Fragment,
 
   useRef,
-
   useState,
-  type ChangeEvent
 } from 'react';
 
 import * as s from './style';
@@ -121,8 +121,9 @@ export const Sidebar = () => {
           <s.ListContainer>
             <h2 className='span'>Menu</h2>
             <ul>
-              {Children.toArray(redirects.map((redirect) => (
+              {React.Children.toArray(redirects.map((redirect) => (
                 <li
+                  key={redirect.name}
                   className={activePage === redirect.page ? 'active' : ''}
                   onClick={() => onChosePage(redirect)}
                 >
@@ -161,7 +162,7 @@ export const Sidebar = () => {
 
           <s.ActionList>
             {Children.toArray(actions.map(action => (
-              <li onClick={action.click}>
+              <li key={action.name} onClick={action.click}>
                 <img
                   src={action.icon}
                   alt={action.name}
