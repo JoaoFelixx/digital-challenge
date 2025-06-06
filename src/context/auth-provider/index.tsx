@@ -6,6 +6,8 @@ import {
   useCallback,
 } from 'react';
 
+import defaultUserPicture from '@/assets/images/user.png';
+
 import { toast } from 'react-toastify';
 
 import type { User } from '@/types/user';
@@ -38,7 +40,14 @@ export const useAuth = (): Auth => {
 
 
 export const AuthProvider = ({ children }: Provider) => {
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<User>({
+    id: '1',
+    name: 'Kaique Steck',
+    email: 'email@.gmail.com',
+    password: '**********',
+    pictureAvatar: defaultUserPicture,
+    position: 'Administrador'
+  });
 
 
   const handleLogin = useCallback(async ({ email, password }: Pick<User, 'email' | 'password'>) => {
@@ -50,6 +59,8 @@ export const AuthProvider = ({ children }: Provider) => {
         name: 'Kaique Steck',
         email,
         password,
+        pictureAvatar: defaultUserPicture,
+        position: 'Administrador'
       })
 
     } catch {
@@ -58,7 +69,9 @@ export const AuthProvider = ({ children }: Provider) => {
   }, [])
 
   const handleLogout = useCallback(() => {
+    setUser(null);
 
+    window.location.href = "/login"
   }, [])
 
 
