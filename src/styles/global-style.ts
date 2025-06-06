@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 import type { Theme } from "./theme";
 
-export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
+export const GlobalStyle = createGlobalStyle<{ theme?: Theme }>`
 
   html {
     font-size: 14px;
