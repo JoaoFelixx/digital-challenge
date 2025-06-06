@@ -1,17 +1,25 @@
 import {
   Children,
 
-  useState
+  Fragment,
+
+  useRef,
+
+  useState,
+  type ChangeEvent
 } from 'react';
 
 import * as s from './style';
 
-import logo from '@/assets/login-logo.svg';
-import menu from '@/assets/dashboard/menu.svg';
-import team from '@/assets/dashboard/team.svg';
-import event from '@/assets/dashboard/event.svg';
-import subscription from '@/assets/dashboard/subscription.svg';
+import logo from '@/assets/icons/login-logo.svg';
+import menu from '@/assets/icons/dashboard/menu.svg';
+import team from '@/assets/icons/dashboard/team.svg';
+import event from '@/assets/icons/dashboard/event.svg';
+import leave from '@/assets/icons/dashboard/leave.svg';
+import account from '@/assets/icons/dashboard/account.svg';
+import subscription from '@/assets/icons/dashboard/subscription.svg';
 
+import { useAuth } from '@/context/auth-provider';
 import { useNavigate } from 'react-router';
 
 
@@ -21,43 +29,82 @@ interface Redirect {
   page: Page;
   name: string;
   path: string;
-  logo: string;
+  icon: string;
+}
+
+interface Action {
+  name: string;
+  icon: string;
+  click(): void
 }
 
 
 export const Sidebar = () => {
   const navigate = useNavigate();
+  const {
+    user,
+
+    handleLogout,
+  } = useAuth();
+
+  const inputFileRef = useRef<HTMLInputElement>(null);
 
   const [activePage, setActivePage] = useState<Page>('events');
+  const [openUserForm, setOpenUserForm] = useState<boolean>(false);
 
 
   const redirects: Redirect[] = [
     {
       page: 'dashboard',
       name: 'Dashboard',
-      logo: menu,
+      icon: menu,
       path: '/dashboard'
     },
     {
       page: 'events',
       name: 'Eventos',
-      logo: event,
+      icon: event,
       path: '/events'
     },
     {
       page: 'teams',
       name: 'Teams',
-      logo: team,
+      icon: team,
       path: '/teams'
     },
     {
       page: 'subscriptions',
       name: 'Subscriptions',
-      logo: subscription,
+      icon: subscription,
       path: '/subscriptions'
     },
   ];
 
+  const actions: Action[] = [
+    {
+      name: 'Alterar dados',
+      icon: account,
+      click: () => {
+        setOpenUserForm(true)
+      }
+    },
+    {
+      name: 'Sair',
+      icon: leave,
+      click: handleLogout,
+    },
+  ]
+
+
+  const onChangeProfilePicture = () => {
+    inputFileRef.current.click();
+  }
+
+  const updateProfilePicture = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files[0];
+
+    console.log(file);
+  }
 
   const onChosePage = ({ page, path }: Omit<Redirect, 'name' | 'logo'>) => {
     navigate(path);
@@ -66,25 +113,72 @@ export const Sidebar = () => {
 
 
   return (
-    <s.SidebarContainer>
-      <s.Logo src={logo} alt="Logo" />
+    <Fragment>
+      <s.SidebarContainer>
+        <s.SideCard>
+          <s.Logo src={logo} alt="Logo" />
 
-      <s.ListContainer>
-        <h2 className='span'>Menu</h2>
-        <ul>
-          {Children.toArray(redirects.map((redirect) => (
-            <li
-              className={activePage === redirect.page ? 'active' : ''}
-              onClick={() => onChosePage(redirect)}
-            >
-              <img src={redirect.logo} alt={redirect.name} />
-              <span>{redirect.name}</span>
-            </li>
-          )),
-          )}
-        </ul>
-      </s.ListContainer>
+          <s.ListContainer>
+            <h2 className='span'>Menu</h2>
+            <ul>
+              {Children.toArray(redirects.map((redirect) => (
+                <li
+                  className={activePage === redirect.page ? 'active' : ''}
+                  onClick={() => onChosePage(redirect)}
+                >
+                  <img src={redirect.icon} alt={redirect.name} />
+                  <span>{redirect.name}</span>
+                </li>
+              )),
+              )}
+            </ul>
+          </s.ListContainer>
+        </s.SideCard>
 
-    </s.SidebarContainer>
+        <s.UserSession>
+          <s.Separator />
+          <s.UserContainer>
+            <div className='img-profile'>
+              <img
+                src={user.pictureAvatar}
+                alt={user.name}
+                className='profile-picture'
+              />
+            </div>
+
+            <div className='user-info'>
+              <h4>{user.name}</h4>
+              <span>{user.position}</span>
+            </div>
+
+            <input
+              type="file"
+              ref={inputFileRef}
+              style={{ display: 'none' }}
+              onChange={updateProfilePicture}
+            />
+          </s.UserContainer>
+
+          <s.ActionList>
+            {Children.toArray(actions.map(action => (
+              <li onClick={action.click}>
+                <img
+                  src={action.icon}
+                  alt={action.name}
+
+                  onClick={onChangeProfilePicture}
+                />
+                <span>{action.name}</span>
+              </li>
+            )))}
+          </s.ActionList>
+        </s.UserSession>
+      </s.SidebarContainer>
+
+      {openUserForm && (
+        <Fragment></Fragment>
+      )}
+
+    </Fragment>
   )
 }
