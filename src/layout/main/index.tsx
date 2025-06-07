@@ -1,16 +1,23 @@
+import { 
+  lazy,
+  
+  Suspense,
+} from 'react';
+
 import * as s from './style';
 
 import type { Provider } from '@/types/provider';
 
-import { Sidebar } from './sidebar';
-
+const DynamicSidebar = lazy(() => import('./sidebar'))
 
 
 export const MainLayout = ({ children }: Provider) => {
 
   return (
     <s.MainContainer>
-      <Sidebar />
+      <Suspense>
+        <DynamicSidebar />
+      </Suspense>
       <s.MainContent>
         {children}
       </s.MainContent>
