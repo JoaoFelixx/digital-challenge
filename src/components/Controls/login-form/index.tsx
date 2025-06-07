@@ -38,7 +38,7 @@ export const LoginForm = () => {
         email, password
       })
 
-      navigate(`/`);
+      navigate(`/events`);
 
     } catch {
       toast.error(`Erro ao fazer login, tente novamente mais tarde`)
