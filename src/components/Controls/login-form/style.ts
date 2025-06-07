@@ -32,11 +32,38 @@ export const Card = styled.div`
     width: 357px;
     height: 316px;
 
-    right: 60px;
+    right: 36px;
   }
+`;
+
+export const Logo = styled.img`
+  width: 161px;
 `;
 
 export const FormController = styled.form`
   display: flex;
   flex-direction: column;
+  gap: 35px;
+
+  padding-bottom: 49px;
+`;
+
+export const Greetings = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  h3 {
+    font-size: 26px;
+    font-weight: 700;
+
+    color: ${({ theme }) => theme.colors.darkOrange};
+  }
+
+  span {
+    font-size: 13px;
+    font-weight: 400;
+
+    color: ${({ theme }) => theme.colors.silver};
+  }
 `;
