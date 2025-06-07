@@ -1,7 +1,7 @@
 import MaintenancePage from "@/components/maintenance";
 
 
-export const Dashboard = () => {
+export const Teams = () => {
 
   return (
     <MaintenancePage />
