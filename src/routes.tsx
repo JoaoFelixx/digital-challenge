@@ -1,10 +1,21 @@
-import { Fragment } from "react";
+import { 
+  Fragment, 
+  
+  useEffect, 
+} from "react";
 
 import { RouterProvider } from 'react-router/dom'
+import { 
+  createBrowserRouter, 
+  
+  useNavigate 
+} from "react-router";
 
-import { createBrowserRouter } from "react-router";
-
-import { Dashboard, Page404, Login } from '@/pages';
+import { 
+  Login, 
+  Page404, 
+  Dashboard, 
+} from '@/pages';
 
 import { useAuth } from "./context/auth-provider";
 
@@ -18,6 +29,16 @@ interface ProtectedRouteProps extends Provider {
 
 const ProtectedRoute = ({ isProtected, children }: ProtectedRouteProps) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (!user && isProtected) {
+      navigate(`/login`)
+
+      return
+    }
+  }, [user, isProtected, navigate])
 
 
   return (

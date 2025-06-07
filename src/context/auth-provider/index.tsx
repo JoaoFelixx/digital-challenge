@@ -40,14 +40,7 @@ export const useAuth = (): Auth => {
 
 
 export const AuthProvider = ({ children }: Provider) => {
-  const [user, setUser] = useState<User>({
-    id: '1',
-    name: 'Kaique Steck',
-    email: 'email@.gmail.com',
-    password: '**********',
-    pictureAvatar: defaultUserPicture,
-    position: 'Administrador'
-  });
+  const [user, setUser] = useState<User>(null);
 
 
   const handleLogin = useCallback(async ({ email, password }: Pick<User, 'email' | 'password'>) => {
