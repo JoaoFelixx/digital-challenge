@@ -1,4 +1,4 @@
-import React, {
+import {
   type ChangeEvent,
 
   Children,
@@ -6,7 +6,10 @@ import React, {
   Fragment,
 
   useRef,
+  useMemo,
   useState,
+  useCallback,
+  memo,
 } from 'react';
 
 import * as s from './style';
@@ -20,10 +23,13 @@ import account from '@/assets/icons/dashboard/account.svg';
 import subscription from '@/assets/icons/dashboard/subscription.svg';
 
 import { useAuth } from '@/context/auth-provider';
-import { useNavigate } from 'react-router';
+import {
+  type ActivePage as Page,
+} from '@/context/page-provider';
 
+import ActionItem from './action-item';
+import RedirectItem from './redirect-item';
 
-type Page = 'dashboard' | 'events' | 'teams' | 'subscriptions';
 
 interface Redirect {
   page: Page;
@@ -39,8 +45,7 @@ interface Action {
 }
 
 
-export const Sidebar = () => {
-  const navigate = useNavigate();
+function Sidebar() {
   const {
     user,
 
@@ -49,16 +54,27 @@ export const Sidebar = () => {
 
   const inputFileRef = useRef<HTMLInputElement>(null);
 
-  const [activePage, setActivePage] = useState<Page>('events');
-  const [openUserForm, setOpenUserForm] = useState<boolean>(false);
+  const [/* openUserForm */, setOpenUserForm] = useState<boolean>(false);
 
 
-  const redirects: Redirect[] = [
+
+  const openUserFormMethod = useCallback(() => {
+    setOpenUserForm(true)
+  }, [])
+
+  const updateProfilePicture = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files[0];
+
+    console.log(file);
+  }
+
+
+  const redirects = useMemo((): Redirect[] => [
     {
       page: 'dashboard',
       name: 'Dashboard',
       icon: menu,
-      path: '/dashboard'
+      path: '/'
     },
     {
       page: 'events',
@@ -78,60 +94,40 @@ export const Sidebar = () => {
       icon: subscription,
       path: '/subscriptions'
     },
-  ];
+  ], []);
 
-  const actions: Action[] = [
+  const actions = useMemo((): Action[] => [
     {
       name: 'Alterar dados',
       icon: account,
-      click: () => {
-        setOpenUserForm(true)
-      }
+      click: openUserFormMethod
     },
     {
       name: 'Sair',
       icon: leave,
       click: handleLogout,
     },
-  ]
-
-
-  const onChangeProfilePicture = () => {
-    inputFileRef.current.click();
-  }
-
-  const updateProfilePicture = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0];
-
-    console.log(file);
-  }
-
-  const onChosePage = ({ page, path }: Omit<Redirect, 'name' | 'logo'>) => {
-    navigate(path);
-    setActivePage(page)
-  }
-
+  ], [openUserFormMethod, handleLogout]);
 
   return (
     <Fragment>
       <s.SidebarContainer>
         <s.SideCard>
-          <s.Logo src={logo} alt="Logo" />
+          <s.Logo 
+            loading='lazy' 
+            src={logo} 
+            alt="Logo" 
+          />
 
           <s.ListContainer>
             <h2 className='span'>Menu</h2>
             <ul>
-              {React.Children.toArray(redirects.map((redirect) => (
-                <li
+              {Children.toArray(redirects.map((redirect) => (
+                <RedirectItem
                   key={redirect.name}
-                  className={activePage === redirect.page ? 'active' : ''}
-                  onClick={() => onChosePage(redirect)}
-                >
-                  <img src={redirect.icon} alt={redirect.name} />
-                  <span>{redirect.name}</span>
-                </li>
-              )),
-              )}
+                  redirect={redirect}
+                />
+              )))}
             </ul>
           </s.ListContainer>
         </s.SideCard>
@@ -162,24 +158,22 @@ export const Sidebar = () => {
 
           <s.ActionList>
             {Children.toArray(actions.map(action => (
-              <li key={action.name} onClick={action.click}>
-                <img
-                  src={action.icon}
-                  alt={action.name}
-
-                  onClick={onChangeProfilePicture}
-                />
-                <span>{action.name}</span>
-              </li>
+              <ActionItem
+                key={action.name}
+                action={action}
+              />
             )))}
           </s.ActionList>
         </s.UserSession>
       </s.SidebarContainer>
-
-      {openUserForm && (
-        <Fragment></Fragment>
+      {/*
+       {openUserForm && (
+        <Fragmen t></Fragment>
       )}
-
+      */}
     </Fragment>
   )
 }
+
+
+export default memo(Sidebar)

@@ -8,11 +8,11 @@ import { theme } from './styles/theme';
 import { GlobalStyle } from './styles/global-style';
 
 import { AuthProvider } from './context/auth-provider';
+import { PageProvider } from './context/page-provider';
 import { ThemeProvider } from 'styled-components';
 
 
 export default function Application() {
-
 
   return (
     <AuthProvider>
@@ -25,7 +25,9 @@ export default function Application() {
           pauseOnHover
           transition={Flip}
         />
-        <RoutesController />
+        <PageProvider>
+          <RoutesController />
+        </PageProvider>
       </ThemeProvider>
     </AuthProvider>
   )
