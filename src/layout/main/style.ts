@@ -9,6 +9,10 @@ export const MainContainer = styled.div`
 `;
 
 export const MainContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   width: calc(100% - 210px);
 
   padding: 30px;
