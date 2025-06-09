@@ -9,6 +9,7 @@ export interface Theme {
     placeholderColor: string;
     inputColor: string;
     hasError: string;
+    black: string;
   };
 }
 
@@ -30,5 +31,7 @@ export const theme = (): Theme => ({
     placeholderColor: "#657593",
 
     hasError: "#FF2E2E",
+
+    black: '#000000',
   },
 });;
