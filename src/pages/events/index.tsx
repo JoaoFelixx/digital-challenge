@@ -3,13 +3,17 @@ import {
 
   Fragment,
 
+  useRef,
+  useMemo,
   useState,
   useEffect,
-  useMemo,
   useCallback,
 } from "react"
 
 import menu from '@/assets/icons/menu.svg';
+import pencil from '@/assets/icons/pencil.svg';
+import eyeIcon from '@/assets/icons/eye.svg';
+import redTrash from '@/assets/icons/red-trash.svg';
 import magnifyingGlass from '@/assets/icons/magnifying-glass.svg';
 
 import * as s from './style';
@@ -22,14 +26,18 @@ import { formatTextForSearch } from "@/utils/format-text-for-search";
 
 import { eventData, type Event } from "./data";
 import { Pagination, type Page } from "@/components/pagination";
+import { useClickAway } from "@/hooks/use-click-away";
 
 
 
 export const Events = () => {
+  const dropdownRef = useRef<HTMLUListElement>(null);
+
   const [events, setEvents] = useState<Event[]>([]);
   const [search, setSearch] = useState<string>("");
   const [addEvent, setAddEvent] = useState<boolean>(false);
   const [pageIndex, setPageIndex] = useState<number>(0);
+  const [dropdownIndex, setDropdownIndex] = useState<number>(null);
 
 
   const filteredEvents = events.filter(event => {
@@ -79,8 +87,8 @@ export const Events = () => {
 
   const nextPage = useCallback(() => {
     const nextPageIndex = pageIndex + 1;
-    
-    if (nextPageIndex > (pages.length -1)) {
+
+    if (nextPageIndex > (pages.length - 1)) {
       return
     }
 
@@ -107,9 +115,15 @@ export const Events = () => {
   }
 
 
+  useClickAway(dropdownRef, () => {
+    setDropdownIndex(null);
+  })
+
+
   useEffect(() => {
     setEvents(eventData)
   }, [])
+
 
   return (
     <Fragment>
@@ -148,7 +162,7 @@ export const Events = () => {
             </table.TR>
           </thead>
           <tbody>
-            {Children.toArray(filteredEvents.map(event => (
+            {Children.toArray(filteredEvents.map((event, index) => (
               <table.TR key={event.id}>
                 <td>{event.name}</td>
                 <td>{event.total}</td>
@@ -162,8 +176,24 @@ export const Events = () => {
                   {formatDateRange({ end: event.endAt, start: event.startAt })}
                 </td>
                 <td>
-                  <s.Action>
+                  <s.Action onClick={() => setDropdownIndex(index)}>
                     <img src={menu} alt="menu" />
+                    {dropdownIndex === index && (
+                      <s.Dropdown ref={dropdownRef}>
+                        <li>
+                          <img src={eyeIcon} alt="eye" />
+                          <span>Visualizar</span>
+                        </li>
+                        <li>
+                          <img src={pencil} alt="eye" />
+                          <span>Editar</span>
+                        </li>
+                        <li>
+                          <img src={redTrash} alt="eye" />
+                          <span>Remover</span>
+                        </li>
+                      </s.Dropdown>
+                    )}
                   </s.Action>
                 </td>
               </table.TR>

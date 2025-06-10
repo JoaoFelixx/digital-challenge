@@ -14,6 +14,8 @@ export interface Theme {
     darkOrange50: string;
     black20: string;
     buttonColorWhite: string;
+    black5: string;
+    black10: string;
   };
 }
 
@@ -40,6 +42,8 @@ export const theme = (): Theme => ({
     hasError: "#FF2E2E",
 
     black: "#000000",
+    black5: "#0000000D",
+    black10: "#0000001A",
     black20: "#00000033"
   },
 });;
