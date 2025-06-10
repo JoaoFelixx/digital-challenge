@@ -4,19 +4,26 @@ import type { Provider } from '@/types/provider';
 
 
 interface ModalProps extends Provider {
+  title: string;
+
   onCloseModal(): void
 }
 
 
-export const Modal = ({ children, onCloseModal }: ModalProps) => {
+export const Modal = ({
+  title,
+  children,
+  onCloseModal
+}: ModalProps) => {
 
   return (
     <s.BlurContainer>
       <s.ModalContainer>
         <s.ModalHeader>
-          <span onClick={onCloseModal}>
+          <h4>{title}</h4>
+          <s.CloseButton onClick={onCloseModal}>
             X
-          </span>
+          </s.CloseButton>
         </s.ModalHeader>
         <s.ModalContent>
           {children}
