@@ -10,6 +10,10 @@ export interface Theme {
     inputColor: string;
     hasError: string;
     black: string;
+    darkOrange10: string;
+    darkOrange50: string;
+    black20: string;
+    buttonColorWhite: string;
   };
 }
 
@@ -18,11 +22,14 @@ export const theme = (): Theme => ({
   colors: {
     white: "#FFFFFF",
     offWhite: "#F8F8F8",
+    buttonColorWhite: "#F5F5F5",
 
     loginForm: "#F9FBFF",
     inputColor: "#F6F6F6",
 
     darkOrange: "#CC6237",
+    darkOrange10: "#CC62371A",
+    darkOrange50: "#CC623780",
 
     borderColor: "#0000001A",
 
@@ -32,6 +39,7 @@ export const theme = (): Theme => ({
 
     hasError: "#FF2E2E",
 
-    black: '#000000',
+    black: "#000000",
+    black20: "#00000033"
   },
 });;
