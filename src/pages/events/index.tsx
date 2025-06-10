@@ -20,14 +20,17 @@ import * as s from './style';
 import * as table from '@/styles/table';
 
 import { Modal } from "@/components/Modal";
+import { EventForm } from "@/components/Controls/event-form";
+import { Pagination, type Page } from "@/components/pagination";
 
 import { formatDateRange } from "@/utils/format-date-range";
 import { formatTextForSearch } from "@/utils/format-text-for-search";
 
-import { eventData, type Event } from "./data";
-import { Pagination, type Page } from "@/components/pagination";
+import { eventData } from "./data";
+
 import { useClickAway } from "@/hooks/use-click-away";
 
+import type { Event } from "@/types/event";
 
 
 export const Events = () => {
@@ -38,25 +41,28 @@ export const Events = () => {
   const [addEvent, setAddEvent] = useState<boolean>(false);
   const [pageIndex, setPageIndex] = useState<number>(0);
   const [dropdownIndex, setDropdownIndex] = useState<number>(null);
+  const [eventToUpdate, setEventToUpdate] = useState<Event>(null);
+  const [eventToRemove, setEventToRemove] = useState<Event>(null);
 
 
   const filteredEvents = events.filter(event => {
     const formattedSearch = formatTextForSearch(search)
     const formattedName = formatTextForSearch(event.name)
 
+    if (!search) {
+      return true
+    }
+
     return formattedName.includes(formattedSearch)
   }).filter((_, index) => {
-    if (index === pageIndex) {
-      return true
-    }
+    const isVisible = (
+      index >= pageIndex * 2 &&
+      index <= pageIndex * 2 + 1
+    );
 
-    if ((pageIndex + 1) === index) {
-      return true
-    }
 
-    return false
+    return isVisible
   })
-
 
 
   const paginationByIndex = useCallback(async ({
@@ -110,10 +116,18 @@ export const Events = () => {
     paginationByIndex({ pageNumber: previousPageIndex + 1 });
   }, [pageIndex, paginationByIndex]);
 
+
   const closeAddEvent = () => {
     setAddEvent(false);
   }
 
+  const closeUpdateEvent = () => {
+    setEventToUpdate(null);
+  }
+
+  const closeRemoveEvent = () => {
+    setEventToUpdate(null);
+  }
 
   useClickAway(dropdownRef, () => {
     setDropdownIndex(null);
@@ -184,11 +198,11 @@ export const Events = () => {
                           <img src={eyeIcon} alt="eye" />
                           <span>Visualizar</span>
                         </li>
-                        <li>
+                        <li onClick={() => setEventToUpdate(event)}>
                           <img src={pencil} alt="eye" />
                           <span>Editar</span>
                         </li>
-                        <li>
+                        <li onClick={() => setEventToRemove(event)}>
                           <img src={redTrash} alt="eye" />
                           <span>Remover</span>
                         </li>
@@ -213,8 +227,39 @@ export const Events = () => {
       </table.TableContainer>
 
       {addEvent && (
-        <Modal onCloseModal={closeAddEvent}>
-          adicionar
+        <Modal
+          title="Adicionar evento"
+          onCloseModal={closeAddEvent}
+        >
+          <EventForm
+            setEvents={setEvents}
+
+            closeModal={closeAddEvent}
+          />
+        </Modal>
+      )}
+
+      {eventToUpdate && (
+        <Modal
+          title="Atualizar evento"
+          onCloseModal={closeUpdateEvent}
+        >
+          <EventForm
+            eventToUpdate={eventToUpdate}
+
+            setEvents={setEvents}
+
+            closeModal={closeUpdateEvent}
+          />
+        </Modal>
+      )}
+
+      {eventToRemove && (
+        <Modal
+          title="Atualizar evento"
+          onCloseModal={closeRemoveEvent}
+        >
+          Remover
         </Modal>
       )}
     </Fragment>

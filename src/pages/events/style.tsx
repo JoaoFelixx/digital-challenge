@@ -67,6 +67,8 @@ export const Button = styled.button`
   border-radius: 33px;
   border: none;
 
+  cursor: pointer;
+
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.darkOrange};
 `;

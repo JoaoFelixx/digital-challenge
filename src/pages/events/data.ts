@@ -1,15 +1,6 @@
 import { uuid } from "@/utils/uuid";
 
-
-export interface Event {
-  id: string;
-  name: string;
-  total: number;
-  status: 'on' | 'off';
-
-  startAt: Date;
-  endAt: Date;
-}
+import type { Event } from "@/types/event";
 
 
 export const eventData: Event[] = [
