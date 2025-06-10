@@ -90,11 +90,12 @@ export const Pagination = ({
         <s.Button onClick={lastPage}>
           Anterior
         </s.Button>
-        {Children.toArray(displayedPages.map(page =>
+        {Children.toArray(displayedPages.map((page,index) =>
           page.pageNumber === -1 ? (
-            <s.Ellipsis>...</s.Ellipsis>
+            <s.Ellipsis key={index}>...</s.Ellipsis>
           ) : (
             <s.Page
+              key={index}
               $selected={page.pageNumber - 1 === pageIndex}
               onClick={() => page.method()}
             >
