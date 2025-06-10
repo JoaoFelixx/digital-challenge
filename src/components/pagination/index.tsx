@@ -31,7 +31,7 @@ export const Pagination = ({
 
   const { displayedPages } = useMemo(() => {
     const totalPages = pages.length;
-    const maxVisiblePages = 3;
+    const maxVisiblePages = 5;
 
 
     const showEveryPagesIfHaveABit = totalPages <= maxVisiblePages
