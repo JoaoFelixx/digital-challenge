@@ -67,5 +67,8 @@ export const InputCard = styled.div<InputProps>`
      width: 90%;
   }
 
+  @media (width <=768px) {
+    width: 100%;
+  }
  
 `;
