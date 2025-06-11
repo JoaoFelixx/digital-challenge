@@ -25,7 +25,7 @@ import account from '@/assets/icons/dashboard/account.svg';
 import subscription from '@/assets/icons/dashboard/subscription.svg';
 
 import { useAuth } from '@/context/auth-provider';
-import { useClickAway } from '@/hooks/use-click-away';
+import { useClickAway } from 'react-use';
 import { useWindowSize } from '@/hooks/use-window-size';
 
 import type { ActivePage as Page } from '@/context/page-provider';
