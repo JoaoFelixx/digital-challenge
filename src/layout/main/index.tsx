@@ -1,16 +1,10 @@
-import {
-  lazy,
-
-  Suspense,
-} from 'react';
-
 import * as s from './style';
 
 import type { Provider } from '@/types/provider';
 
 import { useAuth } from '@/context/auth-provider';
 
-const DynamicSidebar = lazy(() => import('./sidebar'))
+import Sidebar from './sidebar';
 
 
 export const MainLayout = ({ children }: Provider) => {
@@ -18,9 +12,7 @@ export const MainLayout = ({ children }: Provider) => {
 
   return (
     <s.MainContainer>
-      <Suspense>
-        <DynamicSidebar />
-      </Suspense>
+      <Sidebar />
       <s.MainContent>
         <s.Greeting>
           Bem vindo de volta, <strong>{user?.name}</strong>
