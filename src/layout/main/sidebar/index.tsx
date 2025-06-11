@@ -5,11 +5,11 @@ import {
 
   Fragment,
 
+  memo,
+
   useRef,
   useMemo,
   useState,
-  useCallback,
-  memo,
 } from 'react';
 
 import * as s from './style';
@@ -19,16 +19,18 @@ import menu from '@/assets/icons/dashboard/menu.svg';
 import team from '@/assets/icons/dashboard/team.svg';
 import event from '@/assets/icons/dashboard/event.svg';
 import leave from '@/assets/icons/dashboard/leave.svg';
+import upload from '@/assets/icons/upload.svg';
 import account from '@/assets/icons/dashboard/account.svg';
 import subscription from '@/assets/icons/dashboard/subscription.svg';
 
 import { useAuth } from '@/context/auth-provider';
-import {
-  type ActivePage as Page,
-} from '@/context/page-provider';
+import { useClickAway } from '@/hooks/use-click-away';
+
+import type { ActivePage as Page } from '@/context/page-provider';
 
 import ActionItem from './action-item';
 import RedirectItem from './redirect-item';
+import { toast } from 'react-toastify';
 
 
 interface Redirect {
@@ -50,23 +52,13 @@ function Sidebar() {
     user,
 
     handleLogout,
+    uploadPictureAvatar,
   } = useAuth();
 
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const uploadContainerRef = useRef<HTMLDivElement>(null);
 
-  const [/* openUserForm */, setOpenUserForm] = useState<boolean>(false);
-
-
-
-  const openUserFormMethod = useCallback(() => {
-    setOpenUserForm(true)
-  }, [])
-
-  const updateProfilePicture = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0];
-
-    console.log(file);
-  }
+  const [showUploadModal, setShowUploadModal] = useState<boolean>(false);
 
 
   const redirects = useMemo((): Redirect[] => [
@@ -96,27 +88,70 @@ function Sidebar() {
     },
   ], []);
 
+
   const actions = useMemo((): Action[] => [
     {
       name: 'Alterar dados',
       icon: account,
-      click: openUserFormMethod
+      click: null
     },
     {
       name: 'Sair',
       icon: leave,
       click: handleLogout,
     },
-  ], [openUserFormMethod, handleLogout]);
+  ], [handleLogout]);
+
+
+  const updateProfilePicture = (event: ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = event.target.files[0];
+
+      if (!file) {
+        return
+      }
+
+      const availableExtensions = [
+        "png", "jpg", "jpeg"
+      ]
+
+      const isAvailableExtension = availableExtensions.some(
+        extension => file?.name?.endsWith(extension)
+      )
+
+      if (!isAvailableExtension) {
+        toast.warning(`Tipo de arquivo inválido, use png, jpg ou jpeg`)
+
+        return
+      }
+
+      const fileUrl = URL.createObjectURL(file)
+
+      uploadPictureAvatar(fileUrl);
+
+    } catch {
+      toast.error(`Erro ao fazer upload da foto`)
+    }
+  }
+
+  const openFileManager = () => {
+    inputFileRef.current.click()
+  }
+
+
+  useClickAway(uploadContainerRef, () => {
+    setShowUploadModal(false)
+  })
+
 
   return (
     <Fragment>
       <s.SidebarContainer>
         <s.SideCard>
-          <s.Logo 
-            loading='lazy' 
-            src={logo} 
-            alt="Logo" 
+          <s.Logo
+            loading='lazy'
+            src={logo}
+            alt="Logo"
           />
 
           <s.ListContainer>
@@ -140,6 +175,24 @@ function Sidebar() {
                 src={user.pictureAvatar}
                 alt={user.name}
                 className='profile-picture'
+                onClick={() => setShowUploadModal(true)}
+              />
+
+              {showUploadModal && (
+                <s.UploadContainer ref={uploadContainerRef}>
+                  <p>Escolher arquivo</p>
+
+                  <span onClick={openFileManager}>
+                    <img src={upload} alt="upload-icon" />
+                  </span>
+                </s.UploadContainer>
+              )}
+
+              <input
+                type="file"
+                ref={inputFileRef}
+                style={{ display: 'none' }}
+                onChange={updateProfilePicture}
               />
             </div>
 
@@ -147,13 +200,6 @@ function Sidebar() {
               <h4>{user.name}</h4>
               <span>{user.position}</span>
             </div>
-
-            <input
-              type="file"
-              ref={inputFileRef}
-              style={{ display: 'none' }}
-              onChange={updateProfilePicture}
-            />
           </s.UserContainer>
 
           <s.ActionList>
@@ -166,11 +212,6 @@ function Sidebar() {
           </s.ActionList>
         </s.UserSession>
       </s.SidebarContainer>
-      {/*
-       {openUserForm && (
-        <Fragmen t></Fragment>
-      )}
-      */}
     </Fragment>
   )
 }

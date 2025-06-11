@@ -1,5 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+
+const openUploadContainer = keyframes`
+  from {
+    left: -30px;
+    opacity: 0;
+  } 
+  to {
+    left: 44px;
+    opacity: 1;
+  }
+`;
 
 export const SidebarContainer = styled.aside`
   width: 210px;
@@ -101,11 +112,13 @@ export const UserContainer = styled.div`
   }
 
   .img-profile {
+    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border: 1px solid ${({theme}) => theme.colors.darkOrange};
+    border: 1px solid ${({ theme }) => theme.colors.darkOrange};
 
     padding: 1px;
   }
@@ -164,4 +177,37 @@ export const ActionList = styled.ul`
       letter-spacing: 0%;
     }
   }
+`;
+
+export const UploadContainer = styled.div`
+  position: absolute;
+  top: -2px;
+  left: 44px;
+
+  width: 273px;
+  height: 40px;
+
+  border: 1px solid ${({ theme }) => theme.colors.silver};
+  border-radius: 100px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 20px;
+
+  background-color: ${({ theme }) => theme.colors.inputColor};
+
+  animation: ${openUploadContainer} .5s;
+
+  p {
+    font-weight: 400;
+    font-size: 12px;
+
+    color: ${({ theme }) => theme.colors.placeholderColor}
+  }
+
+  span:has(>img) {
+    cursor: pointer;
+  }  
 `;

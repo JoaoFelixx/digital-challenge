@@ -19,6 +19,7 @@ interface Auth {
 
   handleLogin?: ({ email, password }: Pick<User, "email" | "password">) => Promise<void>
   handleLogout?: () => void
+  uploadPictureAvatar?(pictureAvatar: string): void
 }
 
 
@@ -67,6 +68,13 @@ export const AuthProvider = ({ children }: Provider) => {
     window.location.href = "/login"
   }, [])
 
+  const uploadPictureAvatar = useCallback((pictureAvatar: string) => {
+    setUser(userData => ({
+      ...userData,
+      pictureAvatar
+    }))
+  }, [])
+
 
   return (
     <AuthContext.Provider
@@ -75,6 +83,7 @@ export const AuthProvider = ({ children }: Provider) => {
 
         handleLogin,
         handleLogout,
+        uploadPictureAvatar,
       }}
     >
       {children}
