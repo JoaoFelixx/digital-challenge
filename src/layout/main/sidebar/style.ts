@@ -17,6 +17,8 @@ export const SidebarContainer = styled.aside`
   height: 100%;
   max-width: 210px;
 
+  z-index: 2;
+  
   border: 1px solid ${({ theme }) => theme.colors.borderColor};
 
   padding-top: 30px;
@@ -24,6 +26,13 @@ export const SidebarContainer = styled.aside`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  background-color: ${({ theme }) => theme.colors.offWhite};
+
+
+  @media (width <= 768px) {
+    position: fixed;
+  } 
 `;
 
 export const SideCard = styled.div`
@@ -200,6 +209,7 @@ export const UploadContainer = styled.div`
 
   animation: ${openUploadContainer} .5s;
 
+
   p {
     font-weight: 400;
     font-size: 12px;
@@ -210,4 +220,16 @@ export const UploadContainer = styled.div`
   span:has(>img) {
     cursor: pointer;
   }  
+
+
+  @media (width <= 768px) {
+    width: 200px;
+  }
+`;
+
+export const MenuIcon = styled.img`
+  position: fixed;
+
+  width: 36px;
+  height: 36px;
 `;
