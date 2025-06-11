@@ -147,7 +147,8 @@ function Sidebar() {
 
   useClickAway(sidebarContainerRef, () => {
     if (isMobile) {
-      setOpenSidebar(false)
+      setOpenSidebar(false);
+      setShowUploadModal(false);
     }
   })
 
