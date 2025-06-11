@@ -7,18 +7,20 @@ import {
 } from 'react';
 
 import * as s from './style';
+import { useWindowSize } from '@/hooks/use-window-size';
 
 
 export interface Page {
   pageNumber: number;
+
   method(): unknown;
 }
 
 interface PaginationProps {
   style?: CSSProperties
-
   pages: Page[];
   pageIndex: number;
+  hideActionsButtonOnMobile?: boolean
 
   lastPage(): unknown;
   nextPage(): unknown;
@@ -26,8 +28,15 @@ interface PaginationProps {
 
 
 export const Pagination = ({
-  style, pages, pageIndex, nextPage, lastPage
+  style,
+  pages,
+  pageIndex,
+  hideActionsButtonOnMobile,
+
+  lastPage,
+  nextPage,
 }: PaginationProps) => {
+  const { isMobile } = useWindowSize();
 
   const { displayedPages } = useMemo(() => {
     const totalPages = pages.length;
@@ -84,13 +93,20 @@ export const Pagination = ({
   }, [pages, pageIndex]);
 
 
+  const hideButtons = hideActionsButtonOnMobile && isMobile;
+
+
+
   return (
     <s.Container style={style}>
       <s.ButtonWrapper>
-        <s.Button onClick={lastPage}>
-          Anterior
-        </s.Button>
-        {Children.toArray(displayedPages.map((page,index) =>
+        {!hideButtons && (
+          <s.Button onClick={lastPage}>
+            Anterior
+          </s.Button>
+        )}
+
+        {Children.toArray(displayedPages.map((page, index) =>
           page.pageNumber === -1 ? (
             <s.Ellipsis key={index}>...</s.Ellipsis>
           ) : (
@@ -103,9 +119,12 @@ export const Pagination = ({
             </s.Page>
           )
         ))}
-        <s.Button $selected onClick={nextPage}>
-          Próxima
-        </s.Button>
+
+        {!hideButtons && (
+          <s.Button $selected onClick={nextPage}>
+            Próxima
+          </s.Button>
+        )}
       </s.ButtonWrapper>
     </s.Container>
   )

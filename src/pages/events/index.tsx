@@ -221,6 +221,7 @@ export const Events = () => {
           <Pagination
             pages={pages}
             pageIndex={pageIndex}
+            hideActionsButtonOnMobile
 
             lastPage={lastPage}
             nextPage={nextPage}
