@@ -10,6 +10,11 @@ export const FormContainer = styled.div`
   justify-content: space-between;
 
   padding: 10px;
+
+
+  @media (width <= 768px) {
+    justify-content: center;
+  } 
 `;
 
 export const Card = styled.div`

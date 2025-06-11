@@ -22,4 +22,8 @@ export const LoginContainer = styled.div`
   border-radius: 20px;
   
   box-shadow: 0px 100px 200px 0px #00000040;
+
+  @media (width <= 768px) {
+    width: 90%;
+  }
 `;

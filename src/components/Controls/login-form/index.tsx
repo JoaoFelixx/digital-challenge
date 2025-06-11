@@ -17,10 +17,12 @@ import { toast } from 'react-toastify';
 
 import { useAuth } from '@/context/auth-provider';
 import { useNavigate } from 'react-router';
+import { useWindowSize } from '@/hooks/use-window-size';
 
 
 
 export const LoginForm = () => {
+  const { isMobile } = useWindowSize()
   const navigate = useNavigate();
   const { handleLogin } = useAuth();
   const {
@@ -78,10 +80,11 @@ export const LoginForm = () => {
 
         <Submit>Enviar</Submit>
       </s.FormController>
-
-      <s.Card>
-        <img src={login} alt='user-network' />
-      </s.Card>
+      {!isMobile && (
+        <s.Card>
+          <img src={login} alt='user-network' />
+        </s.Card>
+      )}
     </s.FormContainer>
   )
 }
