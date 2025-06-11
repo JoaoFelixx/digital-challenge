@@ -18,6 +18,10 @@ export const MainContent = styled.div`
   padding: 30px;
 
   background-color: ${({ theme }) => theme.colors.offWhite};
+
+  @media (width <= 768px) {
+    width: 100%;
+  }
 `;
 
 export const Greeting = styled.p`
