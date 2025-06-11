@@ -28,14 +28,12 @@ import { formatTextForSearch } from "@/utils/format-text-for-search";
 
 import { eventData } from "./data";
 
-import { useClickAway } from "@/hooks/use-click-away";
-import { useWindowSize } from "@/hooks/use-window-size";
+import { useClickAway } from 'react-use';
 
 import type { Event } from "@/types/event";
 
 
 export const Events = () => {
-  const { isMobile } = useWindowSize();
   const dropdownRef = useRef<HTMLUListElement>(null);
 
   const [events, setEvents] = useState<Event[]>([]);
@@ -166,56 +164,57 @@ export const Events = () => {
             + Inserir novo
           </s.Button>
         </s.TableHeader>
-
-        <table.Table>
-          <thead>
-            <table.TR>
-              <th>Nome do evento</th>
-              {!isMobile && <th>Total de equipes</th>}
-              <th>Status</th>
-              <th>Data</th>
-              <th />
-            </table.TR>
-          </thead>
-          <tbody>
-            {Children.toArray(filteredEvents.map((event, index) => (
-              <table.TR key={event.id}>
-                <td>{event.name}</td>
-                {!isMobile && <td>{event.total}</td>}
-                <td>
-                  <s.StatusContainer>
-                    <span className="status" />
-                    {translateStatus[event.status]}
-                  </s.StatusContainer>
-                </td>
-                <td>
-                  {formatDateRange({ end: event.endAt, start: event.startAt })}
-                </td>
-                <td>
-                  <s.Action onClick={() => setDropdownIndex(index)}>
-                    <img src={menu} alt="menu" />
-                    {dropdownIndex === index && (
-                      <s.Dropdown ref={dropdownRef}>
-                        <li>
-                          <img src={eyeIcon} alt="eye" />
-                          <span>Visualizar</span>
-                        </li>
-                        <li onClick={() => setEventToUpdate(event)}>
-                          <img src={pencil} alt="eye" />
-                          <span>Editar</span>
-                        </li>
-                        <li onClick={() => setEventToRemove(event)}>
-                          <img src={redTrash} alt="eye" />
-                          <span>Remover</span>
-                        </li>
-                      </s.Dropdown>
-                    )}
-                  </s.Action>
-                </td>
+        <table.TableOverFlow>
+          <table.Table>
+            <thead>
+              <table.TR>
+                <th>Nome do evento</th>
+                <th>Total de equipes</th>
+                <th>Status</th>
+                <th>Data</th>
+                <th />
               </table.TR>
-            )))}
-          </tbody>
-        </table.Table>
+            </thead>
+            <tbody>
+              {Children.toArray(filteredEvents.map((event, index) => (
+                <table.TR key={event.id}>
+                  <td>{event.name}</td>
+                  <td>{event.total}</td>
+                  <td>
+                    <s.StatusContainer>
+                      <span className="status" />
+                      {translateStatus[event.status]}
+                    </s.StatusContainer>
+                  </td>
+                  <td>
+                    {formatDateRange({ end: event.endAt, start: event.startAt })}
+                  </td>
+                  <td className="action">
+                    <s.Action onClick={() => setDropdownIndex(index)}>
+                      <img src={menu} alt="menu" />
+                      {dropdownIndex === index && (
+                        <s.Dropdown ref={dropdownRef}>
+                          <li>
+                            <img src={eyeIcon} alt="eye" />
+                            <span>Visualizar</span>
+                          </li>
+                          <li onClick={() => setEventToUpdate(event)}>
+                            <img src={pencil} alt="eye" />
+                            <span>Editar</span>
+                          </li>
+                          <li onClick={() => setEventToRemove(event)}>
+                            <img src={redTrash} alt="eye" />
+                            <span>Remover</span>
+                          </li>
+                        </s.Dropdown>
+                      )}
+                    </s.Action>
+                  </td>
+                </table.TR>
+              )))}
+            </tbody>
+          </table.Table>
+        </table.TableOverFlow>
 
         <s.TableFooter>
           <Pagination

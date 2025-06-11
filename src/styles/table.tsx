@@ -19,6 +19,14 @@ export const TableContainer = styled.div`
   border: 1px solid #09428F2B;
 `;
 
+export const TableOverFlow = styled.div`
+  width: 100%;
+
+  padding-bottom: 10px;
+
+  overflow: auto hidden;
+`;
+
 export const Table = styled.table`
   width: 100%;
 
@@ -43,7 +51,7 @@ export const TR = styled.tr`
     color: ${({ theme }) => theme.colors.darkOrange50};
   }
 
-  td {
+  td:not(.action) {
     color: ${({ theme }) => theme.colors.placeholderColor};
     
     font-family: Poppins;
@@ -52,8 +60,8 @@ export const TR = styled.tr`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    max-width: 0px;
-        
+    max-width: 200px;
+          
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkOrange10};
   }
 `;
