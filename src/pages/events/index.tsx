@@ -29,11 +29,13 @@ import { formatTextForSearch } from "@/utils/format-text-for-search";
 import { eventData } from "./data";
 
 import { useClickAway } from "@/hooks/use-click-away";
+import { useWindowSize } from "@/hooks/use-window-size";
 
 import type { Event } from "@/types/event";
 
 
 export const Events = () => {
+  const { isMobile } = useWindowSize();
   const dropdownRef = useRef<HTMLUListElement>(null);
 
   const [events, setEvents] = useState<Event[]>([]);
@@ -169,7 +171,7 @@ export const Events = () => {
           <thead>
             <table.TR>
               <th>Nome do evento</th>
-              <th>Total de equipes</th>
+              {!isMobile && <th>Total de equipes</th>}
               <th>Status</th>
               <th>Data</th>
               <th />
@@ -179,7 +181,7 @@ export const Events = () => {
             {Children.toArray(filteredEvents.map((event, index) => (
               <table.TR key={event.id}>
                 <td>{event.name}</td>
-                <td>{event.total}</td>
+                {!isMobile && <td>{event.total}</td>}
                 <td>
                   <s.StatusContainer>
                     <span className="status" />

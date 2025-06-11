@@ -45,9 +45,14 @@ export const TR = styled.tr`
 
   td {
     color: ${({ theme }) => theme.colors.placeholderColor};
-
+    
     font-family: Poppins;
     font-size: 14px;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 0px;
         
     border-bottom: 1px solid ${({ theme }) => theme.colors.darkOrange10};
   }

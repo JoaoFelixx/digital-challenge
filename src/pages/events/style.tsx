@@ -14,6 +14,11 @@ export const TableHeader = styled.header`
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
+  flex-wrap: wrap;
+
+  @media (width <= 768px) {
+    justify-content: flex-start;
+  } 
 `;
 
 export const TableFooter = styled.footer`
