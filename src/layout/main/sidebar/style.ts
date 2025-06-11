@@ -12,6 +12,18 @@ const openUploadContainer = keyframes`
   }
 `;
 
+const openSidebar = keyframes`
+  from {
+    left: -210px;
+    opacity: 0;
+  } 
+  to {
+    left: 0;
+    opacity: 1;
+  }
+`;
+
+
 export const SidebarContainer = styled.aside`
   width: 210px;
   height: 100%;
@@ -29,6 +41,8 @@ export const SidebarContainer = styled.aside`
 
   background-color: ${({ theme }) => theme.colors.offWhite};
 
+  animation: ${openSidebar} .5s;
+    
 
   @media (width <= 768px) {
     position: fixed;
