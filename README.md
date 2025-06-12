@@ -1,54 +1,51 @@
-# React + TypeScript + Vite
+﻿<h1 align="center">
+  Digital Challenge (login + events page)
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <a href="#participants">Participants</a> •
+  <a href="#techs">Techs</a> •
+  <a href="#usage">Usage</a>
+</p>
 
-Currently, two official plugins are available:
+<div align="center">
+  <img src="./public/readme/preview.gif" />
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Participants
 
-## Expanding the ESLint configuration
+| [<img src="https://avatars.githubusercontent.com/JoaoFelixx" width="75px;"/>](https://github.com/JoaoFelixx) |
+| :----------------------------------------------------------------------------------------------------------: |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| [João Félix](https://github.com/JoaoFelixx)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Techs
+
+- [x] React.js
+- [x] TypeScript
+- [x] Styled Componets
+- [x] React-Router (react-router-dom updated)
+- [x] react-hook-form
+
+## How to download the project:
+
+```bash
+# Clone the repository
+$ git clone https://github.com/JoaoFelixx/digital-challenge.git
+
+# Enter directory
+$ cd digital-challenge
+
+# Run project
+$ npm install
+$ npm start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Run `npm install`.<br />
+2. Run `npm start` and access `http://localhost:3000/`.<br />
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+<br/>
+
+<p align="center"> Developed by <a href="https://www.linkedin.com/in/felix-devweb/">João Félix</a> ⚓</p>
