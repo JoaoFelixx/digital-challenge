@@ -14,7 +14,7 @@ export const TableContainer = styled.div`
 
   overflow: hidden auto;
 
-  background-color: ${({ theme }) => theme.colors.white} ;
+  background-color: ${({ theme }) => theme.colors.neutralColor} ;
 
   border: 1px solid #09428F2B;
 `;
@@ -48,11 +48,11 @@ export const TR = styled.tr`
 
     letter-spacing: 0%;
 
-    color: ${({ theme }) => theme.colors.darkOrange50};
+    color: ${({ theme }) => theme.colors.primaryColor50};
   }
 
   td:not(.action) {
-    color: ${({ theme }) => theme.colors.placeholderColor};
+    color: ${({ theme }) => theme.colors.neutralColor700};
     
     font-family: Poppins;
     font-size: 14px;
@@ -62,6 +62,6 @@ export const TR = styled.tr`
     white-space: nowrap;
     max-width: 200px;
           
-    border-bottom: 1px solid ${({ theme }) => theme.colors.darkOrange10};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.primaryColor10};
   }
 `;

@@ -17,7 +17,7 @@ export const MainContent = styled.div`
 
   padding: 30px;
 
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.neutralColor100};
 
   @media (width <= 768px) {
     width: 100%;
@@ -34,6 +34,6 @@ export const Greeting = styled.p`
     font-weight: 700;
     line-height: 23px;
 
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.neutralColor1200};
   }
 `;

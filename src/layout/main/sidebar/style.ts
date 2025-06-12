@@ -31,7 +31,7 @@ export const SidebarContainer = styled.aside`
 
   z-index: 2;
   
-  border: 1px solid ${({ theme }) => theme.colors.borderColor};
+  border: 1px solid ${({ theme }) => theme.colors.neutralColor1000};
 
   padding-top: 30px;
 
@@ -39,7 +39,7 @@ export const SidebarContainer = styled.aside`
   flex-direction: column;
   justify-content: space-between;
 
-  background-color: ${({ theme }) => theme.colors.offWhite};
+  background-color: ${({ theme }) => theme.colors.neutralColor100};
 
   animation: ${openSidebar} .5s;
     
@@ -100,8 +100,8 @@ export const ListContainer = styled.div`
       line-height: 15px;
 
       &.active {
-        color: ${({ theme }) => theme.colors.white};
-        background-color: ${({ theme }) => theme.colors.darkOrange};
+        color: ${({ theme }) => theme.colors.neutralColor};
+        background-color: ${({ theme }) => theme.colors.primaryColor};
       
         img {
           filter: invert(1);
@@ -141,7 +141,7 @@ export const UserContainer = styled.div`
     align-items: center;
     justify-content: center;
 
-    border: 1px solid ${({ theme }) => theme.colors.darkOrange};
+    border: 1px solid ${({ theme }) => theme.colors.primaryColor};
 
     padding: 1px;
   }
@@ -210,7 +210,7 @@ export const UploadContainer = styled.div`
   width: 273px;
   height: 40px;
 
-  border: 1px solid ${({ theme }) => theme.colors.silver};
+  border: 1px solid ${({ theme }) => theme.colors.neutralColor600};
   border-radius: 100px;
   
   display: flex;
@@ -219,7 +219,7 @@ export const UploadContainer = styled.div`
 
   padding: 10px 20px;
 
-  background-color: ${({ theme }) => theme.colors.inputColor};
+  background-color: ${({ theme }) => theme.colors.neutralColor400};
 
   animation: ${openUploadContainer} .5s;
 
@@ -228,7 +228,7 @@ export const UploadContainer = styled.div`
     font-weight: 400;
     font-size: 12px;
 
-    color: ${({ theme }) => theme.colors.placeholderColor}
+    color: ${({ theme }) => theme.colors.neutralColor700}
   }
 
   span:has(>img) {

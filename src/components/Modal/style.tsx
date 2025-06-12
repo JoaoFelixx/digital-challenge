@@ -41,7 +41,7 @@ export const ModalContainer = styled.div`
   width: 90%;
   max-width: 500px;
   
-  background-color:${({ theme }) => theme.colors.white};
+  background-color:${({ theme }) => theme.colors.neutralColor};
   
   border-radius: 16px;
   
@@ -59,7 +59,7 @@ export const CloseButton = styled.button`
   
   border: none;
   
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.neutralColor};
   font-size: 1.5rem;
   
   cursor: pointer;
@@ -78,8 +78,8 @@ export const ModalHeader = styled.header`
 
   padding: 1em;
 
-  color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.darkOrange};
+  color: ${({ theme }) => theme.colors.neutralColor};
+  background-color: ${({ theme }) => theme.colors.primaryColor};
 `;
 
 export const ModalContent = styled.div`

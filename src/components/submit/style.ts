@@ -15,8 +15,8 @@ export const Button = styled.button`
 
   cursor: pointer;
 
-  color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.darkOrange};
+  color: ${({ theme }) => theme.colors.neutralColor};
+  background-color: ${({ theme }) => theme.colors.primaryColor};
   
   font-size: 13px;
   font-weight: 500;

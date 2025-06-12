@@ -10,14 +10,14 @@ export const Page = styled.div`
   align-items: center;
   justify-content: center;
   
-  background-color: ${({theme}) => theme.colors.loginForm};
+  background-color: ${({theme}) => theme.colors.neutralColor300};
 `;
 
 export const LoginContainer = styled.div`
   width: 756.5px;
   height: 498px;
 
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.neutralColor};
 
   border-radius: 20px;
   

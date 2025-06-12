@@ -43,12 +43,12 @@ export const Button = styled.button<ButtonProps>`
   font-size: 12px;
 
   background-color: ${({ theme, $selected }) => ($selected 
-    ? theme.colors.darkOrange 
-    : theme.colors.buttonColorWhite
+    ? theme.colors.primaryColor 
+    : theme.colors.neutralColor200
   )};
   color:${({ theme, $selected }) => ($selected 
-    ? theme.colors.white 
-    : theme.colors.black
+    ? theme.colors.neutralColor 
+    : theme.colors.neutralColor1200
   )};
 `;
 
@@ -63,14 +63,14 @@ export const Page = styled.button<ButtonProps>`
 
   border: 0;
   background-color: ${({ theme, $selected }) => ($selected 
-    ? theme.colors.darkOrange 
-    : theme.colors.buttonColorWhite
+    ? theme.colors.primaryColor 
+    : theme.colors.neutralColor200
   )};
 
   font-size: 14px;
   color:${({ theme, $selected }) => ($selected 
-    ? theme.colors.white 
-    : theme.colors.black
+    ? theme.colors.neutralColor 
+    : theme.colors.neutralColor1200
   )};
   font-weight: 500;
 

@@ -6,7 +6,7 @@ export const Title = styled.h1`
   font-size: 20px;
   line-height: 23px;
 
-  color: ${({ theme }) => theme.colors.darkOrange};
+  color: ${({ theme }) => theme.colors.primaryColor};
 `;
 
 export const TableHeader = styled.header`
@@ -40,7 +40,7 @@ export const SearchContainer = styled.div`
 
   border-radius: 33px;
   
-  background-color: ${({ theme }) => theme.colors.inputColor};
+  background-color: ${({ theme }) => theme.colors.neutralColor400};
 
 
   input {
@@ -49,7 +49,7 @@ export const SearchContainer = styled.div`
     border: none;
 
     &::placeholder {
-      color: ${({ theme }) => theme.colors.black20};
+      color: ${({ theme }) => theme.colors.neutralColor900};
     }
 
     &:focus {
@@ -74,8 +74,8 @@ export const Button = styled.button`
 
   cursor: pointer;
 
-  color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.darkOrange};
+  color: ${({ theme }) => theme.colors.neutralColor};
+  background-color: ${({ theme }) => theme.colors.primaryColor};
 `;
 
 export const StatusContainer = styled.div`
@@ -117,12 +117,12 @@ export const Dropdown = styled.ul`
   flex-direction: column;
   justify-content: space-between;
 
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.neutralColor};
 
-  border: 1px solid ${({ theme }) => theme.colors.black5};
+  border: 1px solid ${({ theme }) => theme.colors.neutralColor1100};
   border-radius: 15px;
 
-  box-shadow: 0px 4px 4px 0px ${({ theme }) => theme.colors.black5};
+  box-shadow: 0px 4px 4px 0px ${({ theme }) => theme.colors.neutralColor1100};
 
 
   li {
@@ -137,7 +137,7 @@ export const Dropdown = styled.ul`
     
     padding: 5px 20px;
     
-    border-bottom: 1px solid ${({ theme }) => theme.colors.black10};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.neutralColor1000};
   }
 
   @media (width <= 768px) {

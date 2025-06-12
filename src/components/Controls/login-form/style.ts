@@ -28,7 +28,7 @@ export const Card = styled.div`
 
   border-radius: 20px;
   
-  background-color: ${({ theme }) => theme.colors.darkOrange};
+  background-color: ${({ theme }) => theme.colors.primaryColor};
 
 
   img {
@@ -62,13 +62,13 @@ export const Greetings = styled.main`
     font-size: 26px;
     font-weight: 700;
 
-    color: ${({ theme }) => theme.colors.darkOrange};
+    color: ${({ theme }) => theme.colors.primaryColor};
   }
 
   span {
     font-size: 13px;
     font-weight: 400;
 
-    color: ${({ theme }) => theme.colors.silver};
+    color: ${({ theme }) => theme.colors.neutralColor600};
   }
 `;

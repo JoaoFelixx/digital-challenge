@@ -14,11 +14,11 @@ export const InputContainer = styled.div`
   label {
     font-size: 13px;
     font-weight: 600;
-    color: ${({ theme }) => theme.colors.darkOrange};
+    color: ${({ theme }) => theme.colors.primaryColor};
   }
 
   .error {
-    color: ${({ theme }) => theme.colors.hasError};
+    color: ${({ theme }) => theme.colors.errorColor};
   }
 `;
 
@@ -33,10 +33,10 @@ export const InputCard = styled.div<InputProps>`
   
   padding: 10px 20px;
 
-  background-color: ${({ theme }) => theme.colors.inputColor};
+  background-color: ${({ theme }) => theme.colors.neutralColor400};
 
   border: 1px solid ${({ theme, $hasError }) => ($hasError
-    ? theme.colors.hasError
+    ? theme.colors.errorColor
     : "none"
   )};
 
@@ -57,8 +57,8 @@ export const InputCard = styled.div<InputProps>`
       font-weight: 400;
 
       color: ${({ theme, $hasError }) => ($hasError
-    ? theme.colors.hasError
-    : theme.colors.placeholderColor
+    ? theme.colors.errorColor
+    : theme.colors.neutralColor700
   )};
     }
   }
