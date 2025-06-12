@@ -165,7 +165,7 @@ export const Events = () => {
           </s.Button>
         </s.TableHeader>
         <table.TableOverFlow>
-          <table.Table>
+          <table.Table style={{ marginTop: '32px' }} >
             <thead>
               <table.TR>
                 <th>Nome do evento</th>

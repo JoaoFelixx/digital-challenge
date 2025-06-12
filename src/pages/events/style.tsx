@@ -103,8 +103,8 @@ export const Action = styled.span`
 
 export const Dropdown = styled.ul`
   position: absolute;
-  top: 2px;
-  right: 8px;
+  right: 8px;  
+  bottom: 0;
 
   z-index: 2;
 
@@ -141,8 +141,6 @@ export const Dropdown = styled.ul`
   }
 
   @media (width <= 768px) {
-    top: auto;
-    
-    bottom: 0;
+   
   }
 `;
