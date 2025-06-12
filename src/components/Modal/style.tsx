@@ -80,6 +80,8 @@ export const ModalHeader = styled.header`
 
   color: ${({ theme }) => theme.colors.neutralColor};
   background-color: ${({ theme }) => theme.colors.primaryColor};
+
+  border-radius: 16px 16px 0  0;
 `;
 
 export const ModalContent = styled.div`
